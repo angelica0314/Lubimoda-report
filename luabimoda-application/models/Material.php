@@ -15,7 +15,7 @@ use Yii;
  * @property float $cantidad
  * @property int $codigo_proveedor
  *
- * @property Proveedore $codigoProveedor
+ * @property Proveedor $codigoProveedor
  * @property DetallePedido[] $detallePedidos
  */
 class Material extends \yii\db\ActiveRecord
@@ -39,7 +39,7 @@ class Material extends \yii\db\ActiveRecord
             [['codigo_proveedor'], 'integer'],
             [['unidad_medida', 'color'], 'string', 'max' => 100],
             [['descripcion', 'nombre'], 'string', 'max' => 250],
-            [['codigo_proveedor'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedore::class, 'targetAttribute' => ['codigo_proveedor' => 'codigo']],
+            [['codigo_proveedor'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedor::class, 'targetAttribute' => ['codigo_proveedor' => 'codigo']],
         ];
     }
 

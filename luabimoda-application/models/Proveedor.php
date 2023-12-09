@@ -35,9 +35,9 @@ class Proveedor extends \yii\db\ActiveRecord
     {
         return [
             [['codigo', 'tipo_documento', 'documento', 'nombre', 'email', 'telefono', 'direccion'], 'required'],
-            [['codigo', 'documento', ], 'integer'],
+            [['codigo', 'documento'], 'integer'],
             [['tipo_documento'], 'string', 'max' => 100],
-            [['nombre', 'telefono', 'direccion','email'], 'string', 'max' => 250],
+            [['nombre', 'email', 'telefono', 'direccion'], 'string', 'max' => 250],
             [['codigo'], 'unique'],
         ];
     }
