@@ -54,6 +54,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     . '</li>'*/
                     ['label' => 'Empleados', 'url' => ['/empleado/index']],
                     ['label' => 'Clientes', 'url' => ['/cliente/index']],
+                    ['label' => 'Proveedores', 'url' => ['/proveedor/index']],
                     ['label' => 'Productos', 'url' => ['/producto/index']]
         ]
     ]);

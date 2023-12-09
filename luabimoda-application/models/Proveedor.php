@@ -8,9 +8,10 @@ use Yii;
  * This is the model class for table "proveedores".
  *
  * @property int $codigo
+ * @property string $tipo_documento
  * @property int $documento
  * @property string $nombre
- * @property int $email
+ * @property string $email
  * @property string $telefono
  * @property string $direccion
  *
@@ -33,9 +34,10 @@ class Proveedor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codigo', 'documento', 'nombre', 'email', 'telefono', 'direccion'], 'required'],
-            [['codigo', 'documento', 'email'], 'integer'],
-            [['nombre', 'telefono', 'direccion'], 'string', 'max' => 250],
+            [['codigo', 'tipo_documento', 'documento', 'nombre', 'email', 'telefono', 'direccion'], 'required'],
+            [['codigo', 'documento', ], 'integer'],
+            [['tipo_documento'], 'string', 'max' => 100],
+            [['nombre', 'telefono', 'direccion','email'], 'string', 'max' => 250],
             [['codigo'], 'unique'],
         ];
     }
@@ -47,6 +49,7 @@ class Proveedor extends \yii\db\ActiveRecord
     {
         return [
             'codigo' => 'Codigo',
+            'tipo_documento' => 'Tipo Documento',
             'documento' => 'Documento',
             'nombre' => 'Nombre',
             'email' => 'Email',
