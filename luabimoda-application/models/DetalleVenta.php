@@ -32,10 +32,9 @@ class DetalleVenta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codigo', 'precio_unitario', 'cantidad', 'codigo_venta', 'codigo_producto'], 'required'],
-            [['codigo', 'codigo_venta', 'codigo_producto'], 'integer'],
+            [['precio_unitario', 'cantidad', 'codigo_venta', 'codigo_producto'], 'required'],
             [['precio_unitario', 'cantidad'], 'number'],
-            [['codigo'], 'unique'],
+            [['codigo_venta', 'codigo_producto'], 'integer'],
             [['codigo_venta'], 'exist', 'skipOnError' => true, 'targetClass' => Venta::class, 'targetAttribute' => ['codigo_venta' => 'codigo']],
             [['codigo_producto'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::class, 'targetAttribute' => ['codigo_producto' => 'codigo']],
         ];

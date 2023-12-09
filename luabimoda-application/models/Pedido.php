@@ -35,11 +35,10 @@ class Pedido extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codigo', 'cantidad', 'fecha', 'total', 'documento_empleado', 'descripcion', 'codigo_proveedor'], 'required'],
-            [['codigo', 'fecha', 'total', 'documento_empleado', 'codigo_proveedor'], 'integer'],
+            [['cantidad', 'fecha', 'total', 'documento_empleado', 'descripcion', 'codigo_proveedor'], 'required'],
             [['cantidad'], 'number'],
+            [['fecha', 'total', 'documento_empleado', 'codigo_proveedor'], 'integer'],
             [['descripcion'], 'string', 'max' => 250],
-            [['codigo'], 'unique'],
             [['codigo_proveedor'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedore::class, 'targetAttribute' => ['codigo_proveedor' => 'codigo']],
             [['documento_empleado'], 'exist', 'skipOnError' => true, 'targetClass' => Empleado::class, 'targetAttribute' => ['documento_empleado' => 'documento']],
         ];

@@ -35,12 +35,11 @@ class Venta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codigo', 'descripcion', 'total', 'cantidad', 'fecha', 'documento_empleado', 'documento_cliente'], 'required'],
-            [['codigo', 'documento_empleado', 'documento_cliente'], 'integer'],
+            [['descripcion', 'total', 'cantidad', 'fecha', 'documento_empleado', 'documento_cliente'], 'required'],
             [['total', 'cantidad'], 'number'],
             [['fecha'], 'safe'],
+            [['documento_empleado', 'documento_cliente'], 'integer'],
             [['descripcion'], 'string', 'max' => 250],
-            [['codigo'], 'unique'],
             [['documento_empleado'], 'exist', 'skipOnError' => true, 'targetClass' => Empleado::class, 'targetAttribute' => ['documento_empleado' => 'documento']],
             [['documento_cliente'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::class, 'targetAttribute' => ['documento_cliente' => 'documento']],
         ];

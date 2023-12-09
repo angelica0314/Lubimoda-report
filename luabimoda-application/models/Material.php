@@ -34,12 +34,11 @@ class Material extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codigo', 'unidad_medida', 'descripcion', 'color', 'nombre', 'cantidad', 'codigo_proveedor'], 'required'],
-            [['codigo', 'codigo_proveedor'], 'integer'],
+            [['unidad_medida', 'descripcion', 'color', 'nombre', 'cantidad', 'codigo_proveedor'], 'required'],
             [['cantidad'], 'number'],
+            [['codigo_proveedor'], 'integer'],
             [['unidad_medida', 'color'], 'string', 'max' => 100],
             [['descripcion', 'nombre'], 'string', 'max' => 250],
-            [['codigo'], 'unique'],
             [['codigo_proveedor'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedore::class, 'targetAttribute' => ['codigo_proveedor' => 'codigo']],
         ];
     }

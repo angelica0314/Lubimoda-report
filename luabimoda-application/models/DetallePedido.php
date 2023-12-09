@@ -32,10 +32,9 @@ class DetallePedido extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codigo', 'precio_unitario', 'cantidad', 'codigo_pedido', 'codigo_material'], 'required'],
-            [['codigo', 'codigo_pedido', 'codigo_material'], 'integer'],
+            [['precio_unitario', 'cantidad', 'codigo_pedido', 'codigo_material'], 'required'],
             [['precio_unitario', 'cantidad'], 'number'],
-            [['codigo'], 'unique'],
+            [['codigo_pedido', 'codigo_material'], 'integer'],
             [['codigo_pedido'], 'exist', 'skipOnError' => true, 'targetClass' => Pedido::class, 'targetAttribute' => ['codigo_pedido' => 'codigo']],
             [['codigo_material'], 'exist', 'skipOnError' => true, 'targetClass' => Materiale::class, 'targetAttribute' => ['codigo_material' => 'codigo']],
         ];
