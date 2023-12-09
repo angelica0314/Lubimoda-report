@@ -52,7 +52,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     )
                     . Html::endForm()
                     . '</li>'*/
-                    ['label' => 'Empleados', 'url' => ['/empleado/index']]
+                    ['label' => 'Empleados', 'url' => ['/empleado/index']],
+                    ['label' => 'Clientes', 'url' => ['/cliente/index']],
+                    ['label' => 'Productos', 'url' => ['/producto/index']]
         ]
     ]);
     NavBar::end();
