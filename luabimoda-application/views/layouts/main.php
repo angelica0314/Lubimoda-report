@@ -31,6 +31,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <header id="header">
     <?php
+    if (Yii::$app->controller->id !== 'site' || Yii::$app->controller->action->id !== 'login') {
     NavBar::begin([
         'brandLabel' => 'LUABIMODA',
         'brandUrl' => Yii::$app->homeUrl,
@@ -41,7 +42,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'items' => [
            /* ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Contact', 'url' => ['/site/contact']],*/
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
@@ -51,7 +52,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()
-                    . '</li>'*/
+                    . '</li>',
                     ['label' => 'Empleados', 'url' => ['/empleado/index']],
                     ['label' => 'Clientes', 'url' => ['/cliente/index']],
                     ['label' => 'Proveedores', 'url' => ['/proveedor/index']],
@@ -63,14 +64,17 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         ]
     ]);
     NavBar::end();
+    }
     ?>
 </header>
 
 <main id="main" class="flex-shrink-0" role="main">
     <div class="container">
+    <?php if (Yii::$app->controller->id !== 'site' || Yii::$app->controller->action->id !== 'login') {?>
         <?php if (!empty($this->params['breadcrumbs'])): ?>
             <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
         <?php endif ?>
+        <?php } ?>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>

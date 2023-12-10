@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Material;
+use app\models\Proveedor;
 use app\models\MaterialSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -68,6 +69,7 @@ class MaterialController extends Controller
     public function actionCreate()
     {
         $model = new Material();
+        $proveedores = Proveedor::find()->all();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -79,6 +81,7 @@ class MaterialController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'proveedores' => $proveedores,
         ]);
     }
 
@@ -92,6 +95,7 @@ class MaterialController extends Controller
     public function actionUpdate($codigo)
     {
         $model = $this->findModel($codigo);
+        $proveedores = Proveedor::find()->all();
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'codigo' => $model->codigo]);
@@ -99,6 +103,7 @@ class MaterialController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'proveedores' => $proveedores,
         ]);
     }
 

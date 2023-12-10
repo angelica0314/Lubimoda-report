@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\VentaSearch;
 
 class SiteController extends Controller
 {
@@ -62,6 +63,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+        //return $this->render('login');
     }
 
     /**
@@ -72,7 +74,13 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            
+            // OtroController/actionIndex es el destino al que quieres redirigir
+            $url = \yii\helpers\Url::to(['venta/index']);
+
+            // Realiza la redirección
+            return $this->redirect($url);
+
         }
 
         $model = new LoginForm();
