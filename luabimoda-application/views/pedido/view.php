@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Venta $model */
+/** @var app\models\Pedido $model */
 
 $this->title = $model->codigo;
-$this->params['breadcrumbs'][] = ['label' => 'Ventas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Pedidos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="venta-view">
+<div class="pedido-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Eliminar', ['delete', 'codigo' => $model->codigo], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => '¿Estás seguro de que deseas eliminar este Venta?',
+                'confirm' => '¿Estás seguro de que deseas eliminar este Pedido?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -30,12 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'codigo',
-            'descripcion',
-            'total',
             'cantidad',
             'fecha',
+            'total',
             'documento_empleado',
-            'documento_cliente',
+            'descripcion',
+            'codigo_proveedor',
         ],
     ]) ?>
 

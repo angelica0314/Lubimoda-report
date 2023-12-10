@@ -9,8 +9,8 @@ use Yii;
  *
  * @property int $codigo
  * @property float $cantidad
- * @property int $fecha
- * @property int $total
+ * @property string $fecha
+ * @property float $total
  * @property int $documento_empleado
  * @property string $descripcion
  * @property int $codigo_proveedor
@@ -36,10 +36,11 @@ class Pedido extends \yii\db\ActiveRecord
     {
         return [
             [['cantidad', 'fecha', 'total', 'documento_empleado', 'descripcion', 'codigo_proveedor'], 'required'],
-            [['cantidad'], 'number'],
-            [['fecha', 'total', 'documento_empleado', 'codigo_proveedor'], 'integer'],
+            [['total','cantidad'], 'number'],
+            [['fecha'], 'safe'],
+            [['documento_empleado', 'codigo_proveedor'], 'integer'],
             [['descripcion'], 'string', 'max' => 250],
-            [['codigo_proveedor'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedore::class, 'targetAttribute' => ['codigo_proveedor' => 'codigo']],
+            [['codigo_proveedor'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedor::class, 'targetAttribute' => ['codigo_proveedor' => 'codigo']],
             [['documento_empleado'], 'exist', 'skipOnError' => true, 'targetClass' => Empleado::class, 'targetAttribute' => ['documento_empleado' => 'documento']],
         ];
     }
@@ -67,7 +68,7 @@ class Pedido extends \yii\db\ActiveRecord
      */
     public function getCodigoProveedor()
     {
-        return $this->hasOne(Proveedore::class, ['codigo' => 'codigo_proveedor']);
+        return $this->hasOne(Proveedor::class, ['codigo' => 'codigo_proveedor']);
     }
 
     /**

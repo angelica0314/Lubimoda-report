@@ -1,24 +1,24 @@
 <?php
 
-use app\models\Venta;
+use app\models\Pedido;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var app\models\VentaSearch $searchModel */
+/** @var app\models\PedidoSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Consulta de ventas';
+$this->title = 'Consulta de pedidos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="venta-index">
+<div class="pedido-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Ingresar Venta', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Ingresar Pedido', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,15 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'codigo',
-            'descripcion',
             'fecha',
             'cantidad',
             'total',
+            'descripcion',
             //'documento_empleado',
-            //'documento_cliente',
+            //'codigo_proveedor',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Venta $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Pedido $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'codigo' => $model->codigo]);
                  }
             ],

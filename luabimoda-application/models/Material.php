@@ -66,7 +66,7 @@ class Material extends \yii\db\ActiveRecord
      */
     public function getCodigoProveedor()
     {
-        return $this->hasOne(Proveedore::class, ['codigo' => 'codigo_proveedor']);
+        return $this->hasOne(Proveedor::class, ['codigo' => 'codigo_proveedor']);
     }
 
     /**
