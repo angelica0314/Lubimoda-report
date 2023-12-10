@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\Detallepedido;
+use app\models\Material;
+use app\models\Pedido;
 use app\models\DetallepedidoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -68,6 +70,8 @@ class DetallepedidoController extends Controller
     public function actionCreate()
     {
         $model = new Detallepedido();
+        $pedidos = Pedido::find()->all();
+        $materiales = Material::find()->all();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -79,6 +83,8 @@ class DetallepedidoController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'pedidos' => $pedidos,
+            'materiales' => $materiales,
         ]);
     }
 
@@ -92,6 +98,8 @@ class DetallepedidoController extends Controller
     public function actionUpdate($codigo)
     {
         $model = $this->findModel($codigo);
+        $pedidos = Pedido::find()->all();
+        $materiales = Material::find()->all();
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'codigo' => $model->codigo]);
@@ -99,6 +107,8 @@ class DetallepedidoController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'pedidos' => $pedidos,
+            'materiales' => $materiales,
         ]);
     }
 

@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use yii\jui\DatePicker;
 use app\models\Venta;
 use app\models\Producto;
 

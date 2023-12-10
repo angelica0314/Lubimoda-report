@@ -49,8 +49,8 @@ class Detallepedido extends \yii\db\ActiveRecord
             'codigo' => 'Codigo',
             'precio_unitario' => 'Precio Unitario',
             'cantidad' => 'Cantidad',
-            'codigo_pedido' => 'Codigo Pedido',
-            'codigo_material' => 'Codigo Material',
+            'codigo_pedido' => 'Pedido',
+            'codigo_material' => 'Materiales',
         ];
     }
 
