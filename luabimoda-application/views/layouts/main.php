@@ -56,7 +56,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     ['label' => 'Clientes', 'url' => ['/cliente/index']],
                     ['label' => 'Proveedores', 'url' => ['/proveedor/index']],
                     ['label' => 'Productos', 'url' => ['/producto/index']],
-                    ['label' => 'Materiales', 'url' => ['/material/index']]
+                    ['label' => 'Materiales', 'url' => ['/material/index']],
+                    ['label' => 'Ventas', 'url' => ['/venta/index']],
+                    ['label' => 'Pedidos', 'url' => ['/pedido/index']]
         ]
     ]);
     NavBar::end();

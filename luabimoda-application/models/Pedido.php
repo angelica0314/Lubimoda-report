@@ -15,7 +15,7 @@ use Yii;
  * @property string $descripcion
  * @property int $codigo_proveedor
  *
- * @property Proveedore $codigoProveedor
+ * @property Proveedor $codigoProveedor
  * @property DetallePedido[] $detallePedidos
  * @property Empleado $documentoEmpleado
  */
