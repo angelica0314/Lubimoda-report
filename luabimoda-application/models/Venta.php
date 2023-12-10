@@ -56,8 +56,8 @@ class Venta extends \yii\db\ActiveRecord
             'total' => 'Total',
             'cantidad' => 'Cantidad',
             'fecha' => 'Fecha',
-            'documento_empleado' => 'Documento Empleado',
-            'documento_cliente' => 'Documento Cliente',
+            'documento_empleado' => 'Empleado',
+            'documento_cliente' => 'Cliente',
         ];
     }
 

@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\models\Venta;
 use app\models\VentaSearch;
+use app\models\Cliente;
+use app\models\Empleado;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -68,6 +70,8 @@ class VentaController extends Controller
     public function actionCreate()
     {
         $model = new Venta();
+        $clientes = Cliente::find()->all();
+        $empleados = Empleado::find()->all();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -79,6 +83,8 @@ class VentaController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'clientes' => $clientes,
+            'empleados' => $empleados,
         ]);
     }
 
@@ -92,6 +98,8 @@ class VentaController extends Controller
     public function actionUpdate($codigo)
     {
         $model = $this->findModel($codigo);
+        $clientes = Cliente::find()->all();
+        $empleados = Empleado::find()->all();
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'codigo' => $model->codigo]);
@@ -99,6 +107,8 @@ class VentaController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'clientes' => $clientes,
+            'empleados' => $empleados,
         ]);
     }
 
