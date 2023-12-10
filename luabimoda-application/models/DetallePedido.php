@@ -13,10 +13,10 @@ use Yii;
  * @property int $codigo_pedido
  * @property int $codigo_material
  *
- * @property Materiale $codigoMaterial
+ * @property Material $codigoMaterial
  * @property Pedido $codigoPedido
  */
-class DetallePedido extends \yii\db\ActiveRecord
+class Detallepedido extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,7 @@ class DetallePedido extends \yii\db\ActiveRecord
             [['precio_unitario', 'cantidad'], 'number'],
             [['codigo_pedido', 'codigo_material'], 'integer'],
             [['codigo_pedido'], 'exist', 'skipOnError' => true, 'targetClass' => Pedido::class, 'targetAttribute' => ['codigo_pedido' => 'codigo']],
-            [['codigo_material'], 'exist', 'skipOnError' => true, 'targetClass' => Materiale::class, 'targetAttribute' => ['codigo_material' => 'codigo']],
+            [['codigo_material'], 'exist', 'skipOnError' => true, 'targetClass' => Material::class, 'targetAttribute' => ['codigo_material' => 'codigo']],
         ];
     }
 
@@ -61,7 +61,7 @@ class DetallePedido extends \yii\db\ActiveRecord
      */
     public function getCodigoMaterial()
     {
-        return $this->hasOne(Materiale::class, ['codigo' => 'codigo_material']);
+        return $this->hasOne(Material::class, ['codigo' => 'codigo_material']);
     }
 
     /**

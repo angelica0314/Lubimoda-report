@@ -16,7 +16,7 @@ use Yii;
  * @property Producto $codigoProducto
  * @property Venta $codigoVenta
  */
-class DetalleVenta extends \yii\db\ActiveRecord
+class Detalleventa extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}

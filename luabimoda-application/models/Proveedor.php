@@ -15,7 +15,7 @@ use Yii;
  * @property string $telefono
  * @property string $direccion
  *
- * @property Materiale[] $materiales
+ * @property Material[] $materiales
  * @property Pedido[] $pedidos
  */
 class Proveedor extends \yii\db\ActiveRecord
