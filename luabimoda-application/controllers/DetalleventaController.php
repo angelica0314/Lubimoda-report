@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\Detalleventa;
+use app\models\Venta;
+use app\models\Producto;
 use app\models\DetalleventaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -68,6 +70,8 @@ class DetalleventaController extends Controller
     public function actionCreate()
     {
         $model = new Detalleventa();
+        $ventas = Venta::find()->all();
+        $productos = Producto::find()->all();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -79,6 +83,8 @@ class DetalleventaController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'ventas' => $ventas,
+            'productos' => $productos,
         ]);
     }
 
@@ -92,6 +98,9 @@ class DetalleventaController extends Controller
     public function actionUpdate($codigo)
     {
         $model = $this->findModel($codigo);
+        $ventas = Venta::find()->all();
+        $productos = Producto::find()->all();
+
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'codigo' => $model->codigo]);
@@ -99,6 +108,8 @@ class DetalleventaController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'ventas' => $ventas,
+            'productos' => $productos,
         ]);
     }
 

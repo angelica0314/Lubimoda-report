@@ -55,9 +55,10 @@ class Pedido extends \yii\db\ActiveRecord
             'cantidad' => 'Cantidad',
             'fecha' => 'Fecha',
             'total' => 'Total',
-            'documento_empleado' => 'Documento Empleado',
+            'documento_empleado' => 'Empleado',
+            'codigo_proveedor' => 'Proveedor',
             'descripcion' => 'Descripcion',
-            'codigo_proveedor' => 'Codigo Proveedor',
+            
         ];
     }
 

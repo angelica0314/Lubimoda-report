@@ -15,7 +15,9 @@ use app\models\Proveedor;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'codigo_proveedor')->dropDownList(
-    ArrayHelper::map($proveedores, 'codigo', 'nombre'), // Ajusta según la estructura de tu modelo Proveedor
+    ArrayHelper::map($proveedores, 'codigo', function($model) {
+        return $model['codigo'] . ' - ' . $model['nombre'];
+    }), // Ajusta según la estructura de tu modelo Proveedor
     ['prompt' => 'Selecciona un proveedor']
     ) ?>
 

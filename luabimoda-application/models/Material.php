@@ -55,7 +55,7 @@ class Material extends \yii\db\ActiveRecord
             'color' => 'Color',
             'nombre' => 'Nombre',
             'cantidad' => 'Cantidad',
-            'codigo_proveedor' => 'Codigo Proveedor',
+            'codigo_proveedor' => 'Proveedor',
         ];
     }
 

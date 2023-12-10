@@ -44,7 +44,7 @@ use app\models\Cliente;
         'changeYear' => true,
         'yearRange' => '1900:' . date('Y'),
     ],
-]); ?>
+    ]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

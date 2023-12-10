@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\Pedido;
+use app\models\Proveedor;
+use app\models\Empleado;
 use app\models\PedidoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -68,6 +70,8 @@ class PedidoController extends Controller
     public function actionCreate()
     {
         $model = new Pedido();
+        $proveedores = Proveedor::find()->all();
+        $empleados = Empleado::find()->all();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -79,6 +83,8 @@ class PedidoController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'proveedores' => $proveedores,
+            'empleados' => $empleados,
         ]);
     }
 
@@ -92,6 +98,8 @@ class PedidoController extends Controller
     public function actionUpdate($codigo)
     {
         $model = $this->findModel($codigo);
+        $proveedores = Proveedor::find()->all();
+        $empleados = Empleado::find()->all();
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'codigo' => $model->codigo]);
@@ -99,6 +107,9 @@ class PedidoController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'proveedores' => $proveedores,
+            'empleados' => $empleados,
+            
         ]);
     }
 
