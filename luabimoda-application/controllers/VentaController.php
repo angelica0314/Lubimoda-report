@@ -103,6 +103,11 @@ class VentaController extends Controller
         ]);
     }
 
+    public function actionAgregardetalle($codigo)
+    {
+        return $this->redirect(['detalleventa/create','codigo'=>$codigo]);
+    }
+
     /**
      * Updates an existing Venta model.
      * If update is successful, the browser will be redirected to the 'view' page.

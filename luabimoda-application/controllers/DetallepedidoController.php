@@ -125,9 +125,12 @@ class DetallepedidoController extends Controller
      */
     public function actionDelete($codigo)
     {
+        $model = $this->findModel($codigo);
+        $codigo_pedido = $model->codigo_pedido;
         $this->findModel($codigo)->delete();
+        
 
-        return $this->redirect(['pedido/view','codigo' => $codigo]);
+        return $this->redirect(['pedido/view','codigo' => $codigo_pedido]);
     }
 
     public function actionVolver($codigo)

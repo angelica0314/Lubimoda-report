@@ -67,15 +67,18 @@ class DetalleventaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($codigo)
     {
         $model = new Detalleventa();
+        $model->codigo_venta = $codigo;
         $ventas = Venta::find()->all();
         $productos = Producto::find()->all();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'codigo' => $model->codigo]);
+
+                //return $this->redirect(['view', 'codigo' => $model->codigo]);
+                return $this->redirect(['venta/view','codigo' => $model->codigo_venta]);
             }
         } else {
             $model->loadDefaultValues();
@@ -122,9 +125,17 @@ class DetalleventaController extends Controller
      */
     public function actionDelete($codigo)
     {
+        $model = $this->findModel($codigo);
+        $codigo_venta = $model -> codigo_venta;
         $this->findModel($codigo)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['venta/view','codigo' => $codigo_venta]);
+    }
+
+    public function actionVolver($codigo)
+    {
+
+        return $this->redirect(['venta/view','codigo' => $codigo]);
     }
 
     /**

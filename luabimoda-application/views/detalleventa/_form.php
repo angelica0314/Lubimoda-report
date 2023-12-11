@@ -15,13 +15,6 @@ use app\models\Producto;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'codigo_venta')->dropDownList(
-    ArrayHelper::map($ventas, 'codigo', function($model) {
-        return $model['codigo'] . ' - ' . $model['descripcion'];
-    }),
-    ['prompt' => 'Selecciona venta']
-    ) ?>
-
     <?= $form->field($model, 'codigo_producto')->dropDownList(
     ArrayHelper::map($productos, 'codigo', function($model) {
         return $model['codigo'] . ' - ' . $model['nombre'];
@@ -35,6 +28,7 @@ use app\models\Producto;
 
 
     <div class="form-group">
+    <?= Html::a('Volver', ['volver', 'codigo' => $model->codigo_venta], ['class' => 'btn btn-secondary']) ?>
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
