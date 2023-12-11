@@ -5,11 +5,16 @@ use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\db\ActiveQuery;
 use app\models\Material;
+use yii\grid\EditableColumn;
+use yii\data\ActiveDataProvider;
+use yii\widgets\ActiveForm;
+
 
 /** @var yii\web\View $this */
 /** @var app\models\Pedido $model */
 
-$this->title = $model->codigo;
+
+$this->title = 'Pedido N° '.$model->codigo;
 $this->params['breadcrumbs'][] = ['label' => 'Pedidos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -45,8 +50,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h3>Detalle del pedido</h3>
 
+
+
 <?= GridView::widget([
-        'dataProvider' => $dataProviderDetalle,
+        'dataProvider' => $detallePedidoDataProvider,
         'filterModel' => $searchModelDetalle,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -68,12 +75,28 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'cantidad',
             'precio_unitario',
-
             [
-                
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{delete}', // Solo mostrar el botón de eliminar
+                'buttons' => [
+                    'delete' => function ($url, $model) {
+                        return Html::a(
+                            '<span class="fas fa-trash"></span>',
+                            ['detallepedido/delete', 'codigo' => $model->codigo],
+                            [
+                                'title' => 'Eliminar',
+                                'data-confirm' => '¿Estás seguro de que quieres eliminar este elemento?',
+                                'data-method' => 'post',
+                            ]
+                        );
+                    },
+                ],
             ],
-        ],
-    ]); ?>
+        ]
+    ]); 
+    ?>
 
+
+<?= Html::a('Agregar Detalle', ['agregardetalle', 'codigo' => $model->codigo], ['class' => 'btn btn-outline-secondary']) ?>
 
 </div>

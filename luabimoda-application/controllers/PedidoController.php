@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Pedido;
 use app\models\Detallepedido;
 use yii\data\ActiveDataProvider;
@@ -12,6 +13,7 @@ use app\models\PedidoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 
 /**
@@ -35,6 +37,25 @@ class PedidoController extends Controller
                 ],
             ]
         );
+    }
+
+    public function actionUpdateAttribute($codigo, $attribute, $value)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $model = Detallepedido::findOne($codigo);
+
+        if ($model) {
+            $model->$attribute = $value;
+
+            if ($model->save()) {
+                return ['success' => true];
+            } else {
+                return ['success' => false, 'errors' => $model->errors];
+            }
+        }
+
+        return ['success' => false, 'message' => 'Detallepedido not found'];
     }
 
     /**
@@ -64,7 +85,7 @@ class PedidoController extends Controller
         $searchModelDetalle = new DetallepedidoSearch();
 
         $pedido = $this->findModel($codigo);
-        $dataProviderDetalle = new ActiveDataProvider([
+        $detallePedidoDataProvider = new ActiveDataProvider([
             'query' => Detallepedido::find()->where(['codigo_pedido' => $pedido->codigo]),
             'pagination' => [
                 'pageSize' => 10, // Puedes ajustar el tamaño de la página según tus necesidades
@@ -73,11 +94,16 @@ class PedidoController extends Controller
 
         return $this->render('view', [
             'model' => $this->findModel($codigo),
-            'dataProviderDetalle' => $dataProviderDetalle,
+            'detallePedidoDataProvider' => $detallePedidoDataProvider,
             'searchModelDetalle' => $searchModelDetalle,
         ]);
     }
 
+
+
+    public function actionAgregardetalle($codigo){
+        return $this->redirect(['detallepedido/create','codigo'=>$codigo]);
+    }
     /**
      * Creates a new Pedido model.
      * If creation is successful, the browser will be redirected to the 'view' page.

@@ -16,13 +16,7 @@ use app\models\Material;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'codigo_pedido')->dropDownList(
-    ArrayHelper::map($pedidos, 'codigo', function($model) {
-        return $model['codigo'] . ' - ' . $model['descripcion'];
-    }),
-    ['prompt' => 'Selecciona pedido']
-    ) ?>
-     <?= $form->field($model, 'codigo_material')->dropDownList(
+    <?= $form->field($model, 'codigo_material')->dropDownList(
     ArrayHelper::map($materiales, 'codigo', function($model) {
         return $model['codigo'] . ' - ' . $model['descripcion'];
     }),
@@ -34,7 +28,9 @@ use app\models\Material;
     <?= $form->field($model, 'precio_unitario')->textInput() ?>
 
     <div class="form-group">
+        <?= Html::a('Volver', ['volver', 'codigo' => $model->codigo_pedido], ['class' => 'btn btn-secondary']) ?>
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        
     </div>
 
     <?php ActiveForm::end(); ?>

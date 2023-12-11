@@ -33,6 +33,8 @@ class DetallepedidoController extends Controller
         );
     }
 
+    
+
     /**
      * Lists all Detallepedido models.
      *
@@ -67,15 +69,17 @@ class DetallepedidoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($codigo)
     {
         $model = new Detallepedido();
+        $model->codigo_pedido = $codigo;
         $pedidos = Pedido::find()->all();
         $materiales = Material::find()->all();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'codigo' => $model->codigo]);
+                //return $this->redirect(['view', 'codigo' => $model->codigo]);
+                return $this->redirect(['pedido/view','codigo' => $model->codigo_pedido]);
             }
         } else {
             $model->loadDefaultValues();
@@ -123,7 +127,13 @@ class DetallepedidoController extends Controller
     {
         $this->findModel($codigo)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['pedido/view','codigo' => $codigo]);
+    }
+
+    public function actionVolver($codigo)
+    {
+
+        return $this->redirect(['pedido/view','codigo' => $codigo]);
     }
 
     /**
