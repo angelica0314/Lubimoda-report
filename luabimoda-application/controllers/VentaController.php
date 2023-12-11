@@ -6,6 +6,9 @@ use app\models\Venta;
 use app\models\VentaSearch;
 use app\models\Cliente;
 use app\models\Empleado;
+use app\models\Detalleventa;
+use yii\data\ActiveDataProvider;
+use app\models\DetalleventaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -57,8 +60,20 @@ class VentaController extends Controller
      */
     public function actionView($codigo)
     {
+        $searchModelDetalle = new DetalleventaSearch();
+
+        $venta = $this->findModel($codigo);
+        $dataProviderDetalle = new ActiveDataProvider([
+            'query' => Detalleventa::find()->where(['codigo_venta' => $venta->codigo]),
+            'pagination' => [
+                'pageSize' => 10, // Puedes ajustar el tamaño de la página según tus necesidades
+            ],
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($codigo),
+            'dataProviderDetalle' => $dataProviderDetalle,
+            'searchModelDetalle' => $searchModelDetalle,
         ]);
     }
 

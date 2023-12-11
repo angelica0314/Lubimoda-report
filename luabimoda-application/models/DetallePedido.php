@@ -64,6 +64,8 @@ class Detallepedido extends \yii\db\ActiveRecord
         return $this->hasOne(Material::class, ['codigo' => 'codigo_material']);
     }
 
+    
+
     /**
      * Gets query for [[CodigoPedido]].
      *

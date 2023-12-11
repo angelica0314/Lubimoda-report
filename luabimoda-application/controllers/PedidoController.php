@@ -3,12 +3,16 @@
 namespace app\controllers;
 
 use app\models\Pedido;
+use app\models\Detallepedido;
+use yii\data\ActiveDataProvider;
+use app\models\DetallepedidoSearch;
 use app\models\Proveedor;
 use app\models\Empleado;
 use app\models\PedidoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 
 /**
  * PedidoController implements the CRUD actions for Pedido model.
@@ -57,8 +61,20 @@ class PedidoController extends Controller
      */
     public function actionView($codigo)
     {
+        $searchModelDetalle = new DetallepedidoSearch();
+
+        $pedido = $this->findModel($codigo);
+        $dataProviderDetalle = new ActiveDataProvider([
+            'query' => Detallepedido::find()->where(['codigo_pedido' => $pedido->codigo]),
+            'pagination' => [
+                'pageSize' => 10, // Puedes ajustar el tamaño de la página según tus necesidades
+            ],
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($codigo),
+            'dataProviderDetalle' => $dataProviderDetalle,
+            'searchModelDetalle' => $searchModelDetalle,
         ]);
     }
 

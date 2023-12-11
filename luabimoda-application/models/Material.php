@@ -78,4 +78,9 @@ class Material extends \yii\db\ActiveRecord
     {
         return $this->hasMany(DetallePedido::class, ['codigo_material' => 'codigo']);
     }
+
+    public static function getModelMaterial($codigoMaterial)
+    {
+        return self::findOne($codigoMaterial);
+    }
 }

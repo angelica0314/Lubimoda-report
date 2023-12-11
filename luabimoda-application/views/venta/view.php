@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\db\ActiveQuery;
+use app\models\Producto;
 
 /** @var yii\web\View $this */
 /** @var app\models\Venta $model */
@@ -38,5 +41,36 @@ $this->params['breadcrumbs'][] = $this->title;
             'documento_cliente',
         ],
     ]) ?>
+    <h3>Detalle del pedido</h3>
+
+<?= GridView::widget([
+        'dataProvider' => $dataProviderDetalle,
+        'filterModel' => $searchModelDetalle,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'codigo',
+            //'codigo_venta',
+            [
+                'label' => 'Producto',
+                'attribute' => 'codigo_producto',
+                'value' => function ($model) {
+                    // Accede al modelo de empleado desde el modelo de detalle
+                    $producto = Producto::getModelProducto($model->codigo_producto);
+                    
+                    // Retorna el formato deseado (puedes ajustar esto según tu modelo)
+                    return $producto ? $producto['codigo'] .  ' - ' . $producto['nombre'] : 'N/A';
+                },
+                'format' => 'raw',
+                'enableSorting' => true,
+            ],
+            'cantidad',
+            'precio_unitario',
+
+            [
+                
+            ],
+        ],
+    ]); ?>
 
 </div>

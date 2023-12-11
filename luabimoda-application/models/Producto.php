@@ -64,4 +64,9 @@ class Producto extends \yii\db\ActiveRecord
     {
         return $this->hasMany(DetalleVenta::class, ['codigo_producto' => 'codigo']);
     }
+
+    public static function getModelProducto($codigoProducto)
+    {
+        return self::findOne($codigoProducto);
+    }
 }
