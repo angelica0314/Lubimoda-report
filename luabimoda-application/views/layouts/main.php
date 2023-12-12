@@ -10,8 +10,37 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
-AppAsset::register($this);
+$this->registerCss("
 
+    /* Estilo inicial para ocultar el menú desplegable */
+    .dropdown-menu {
+        display: none;
+    }
+
+    /* Estilo para mostrar el menú desplegable cuando el mouse pasa sobre la opción de menú */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Ajuste para llevar LogOut al final del menú */
+    .navbar-nav {
+        width: 100%;
+        text-align: right; /* Alinea las opciones a la derecha */
+    }
+    
+    .navbar-nav > li {
+        float: none; /* Asegura que las opciones se muestren en línea */
+        display: inline-block;
+    }
+    
+");
+AppAsset::register($this);
 $this->registerCsrfMetaTags();
 $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
@@ -37,31 +66,52 @@ echo Html::cssFile('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/c
     NavBar::begin([
         'brandLabel' => 'LUABIMODA',
         'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
+        'options' => ['class' => 'navbar-expand-md navbar-dark bg-secondary fixed-top']
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+        'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-           /* ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Ventas', 
+            'items' => [
+                ['label' => 'Consulta de ventas', 'url' => ['/venta/index']],
+                ['label' => 'Listado de clientes', 'url' => ['/cliente/index']],
+                ['label' => 'Lista de productos', 'url' => ['/producto/index']],
+                ]
+            ],
+            ['label' => 'Pedidos', 
+            'items' => [
+                ['label' => 'Consulta de pedidos', 'url' => ['/pedido/index']],
+                ['label' => 'Listado de proveedores', 'url' => ['/proveedor/index']],
+                ['label' => 'Lista de materiales', 'url' => ['/material/index']],
+                ]
+            ],
+            ['label' => 'Administración', 
+            'items' => [
+                ['label' => 'Listado de empleados', 'url' => ['/empleado/index']],
+                ]
+            ],
+           /*['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],*/
+            
+           
+            ['label' => 'Reportes', 
+            'items' => [
+                ['label' => 'Clientes fieles', 'url' => '#'],
+                ['label' => 'Empleado del mes', 'url' => '#'],
+                ]
+            ],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'nav-link btn btn-link logout']
+                        'Salir(' . Yii::$app->user->identity->username . ')',
+                        ['class' => ' nav-link btn btn-link logout ']
                     )
                     . Html::endForm()
-                    . '</li>',
-                    ['label' => 'Empleados', 'url' => ['/empleado/index']],
-                    ['label' => 'Clientes', 'url' => ['/cliente/index']],
-                    ['label' => 'Proveedores', 'url' => ['/proveedor/index']],
-                    ['label' => 'Productos', 'url' => ['/producto/index']],
-                    ['label' => 'Materiales', 'url' => ['/material/index']],
-                    ['label' => 'Ventas', 'url' => ['/venta/index']],
-                    ['label' => 'Pedidos', 'url' => ['/pedido/index']]
+                    . '</li>'         
+                    
         ]
     ]);
     NavBar::end();
